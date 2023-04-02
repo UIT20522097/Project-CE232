@@ -10,7 +10,7 @@ import Logo from "../components/Logo";
 function MainHeader() {
   return (
     <Box>
-      <AppBar position="static">
+      <AppBar position="static" sx={{backgroundColor: 'rgb(227, 242, 253)', color: '#111'}}>
         <Toolbar variant="dense">
           <IconButton
             edge="start"
@@ -20,12 +20,12 @@ function MainHeader() {
           >
             <Logo />
           </IconButton>
-          <Typography variant="h6" color="inherit" component="div">
-            Garden
+          <Typography variant="h4" color="inherit" component="div">
+            Smart Garden
           </Typography>
           <Box sx={{ flexGrow: 1 }} />
           <Typography variant="h6" color="inherit" component="div">
-            Welcome !
+            Welcome UIT2052!
           </Typography>
         </Toolbar>
       </AppBar>
