@@ -10,7 +10,10 @@ import Logo from "../components/Logo";
 function MainHeader() {
   return (
     <Box>
-      <AppBar position="static" sx={{backgroundColor: 'rgb(227, 242, 253)', color: '#111'}}>
+      <AppBar
+        position="static"
+        sx={{ backgroundColor: "rgb(227, 242, 253)", color: "#111" }}
+      >
         <Toolbar variant="dense">
           <IconButton
             edge="start"
