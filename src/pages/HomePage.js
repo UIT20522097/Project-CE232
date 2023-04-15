@@ -9,6 +9,7 @@ import {
 import { CategoryScale } from "chart.js";
 import { Chart } from "chart.js/auto";
 import React, { useState } from "react";
+import { toast } from "react-toastify";
 import InfoCard from "../components/InfoCard";
 import LineChart from "../components/LineChart";
 import { Data } from "../utils/Data";
@@ -59,14 +60,23 @@ function HomePage() {
   });
 
   const handleCooling = () => {
+    coolState
+      ? toast.success("Cooling On !!!")
+      : toast.success("Cooling Off !!!");
     setCoolState(!coolState);
   };
 
   const handleLight = () => {
+    lightState
+      ? toast.success("Light On !!!")
+      : toast.success("Light Off !!!");
     setLightState(!lightState);
   };
 
   const handleWater = () => {
+    waterState
+      ? toast.success("Watering On !!!")
+      : toast.success("Watering Off !!!");
     setWaterState(!waterState);
   };
 
