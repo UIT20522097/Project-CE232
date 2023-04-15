@@ -9,11 +9,30 @@ import {
 import { CategoryScale } from "chart.js";
 import { Chart } from "chart.js/auto";
 import React, { useState } from "react";
+import InfoCard from "../components/InfoCard";
 import LineChart from "../components/LineChart";
-import StateTable from "../components/StateTable";
 import { Data } from "../utils/Data";
 
 Chart.register(CategoryScale);
+
+const infomation = [
+  {
+    infoName: "Nhiệt độ",
+    value: "30",
+  },
+  {
+    infoName: "Độ ẩm không khí",
+    value: "50",
+  },
+  {
+    infoName: "Độ ẩm đất",
+    value: "30",
+  },
+  {
+    infoName: "Ánh sáng",
+    value: "Ban ngày",
+  },
+];
 
 function HomePage() {
   const [coolState, setCoolState] = useState(false);
@@ -65,175 +84,180 @@ function HomePage() {
 
   return (
     <div>
-      <Grid container component="main" sx={{ height: "40vh" }}>
+      <Grid
+        container
+        component="main"
+        sx={{
+          minHeight: "40vh",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
         <CssBaseline />
-        <Grid item xs={false} sm={3} md={7}>
+
+        <Box
+          sx={{
+            my: 8,
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+          }}
+        >
+          {infomation.map((info) => (
+            <InfoCard infoName={info.infoName} value={info.value} />
+          ))}
+        </Box>
+        <Box
+          sx={{
+            my: 4,
+            mx: 4,
+            display: "flex",
+            flexDirection: "column",
+            minWidth: "1000px",
+          }}
+        >
+          <Typography variant="h3" component="h4" alignSelf="center">
+            Controller
+          </Typography>
           <Box
             sx={{
-              my: 8,
-              mx: 4,
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
+              padding: "10px",
+              backgroundColor: "#fff",
+              borderRadius: "5px",
+              mb: 3,
             }}
           >
-            <Typography variant="h3" component="h">
-              State Of Garden
-            </Typography>
-            <StateTable />
-          </Box>
-        </Grid>
-        <Grid item xs={12} sm={8} md={5} elevation={6}>
-          <Box
-            sx={{
-              my: 8,
-              mx: 4,
-              display: "flex",
-              flexDirection: "column",
-            }}
-          >
-            <Typography variant="h3" component="h4" alignSelf="center">
-              Controller
-            </Typography>
             <Box
               sx={{
-                padding: "10px",
-                backgroundColor: "#fff",
-                borderRadius: "5px",
-                mb: 3,
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
               }}
             >
-              <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                }}
-              >
-                <Typography variant="h4">Điều hòa</Typography>
-                {coolState ? (
-                  <Button
-                    onClick={handleCooling}
-                    variant="contained"
-                    sx={{
+              <Typography variant="h4">Điều hòa</Typography>
+              {coolState ? (
+                <Button
+                  onClick={handleCooling}
+                  variant="contained"
+                  sx={{
+                    backgroundColor: "#3498db",
+                    "&:hover": {
+                      color: "#AAAFB4",
                       backgroundColor: "#3498db",
-                      "&:hover": {
-                        color: "#AAAFB4",
-                        backgroundColor: "#3498db",
-                      },
-                    }}
-                  >
-                    On
-                  </Button>
-                ) : (
-                  <Button
-                    onClick={handleCooling}
-                    variant="contained"
-                    sx={{
+                    },
+                  }}
+                >
+                  On
+                </Button>
+              ) : (
+                <Button
+                  onClick={handleCooling}
+                  variant="contained"
+                  sx={{
+                    backgroundColor: "#AAAFB4",
+                    "&:hover": {
+                      color: "#fff",
                       backgroundColor: "#AAAFB4",
-                      "&:hover": {
-                        color: "#fff",
-                        backgroundColor: "#AAAFB4",
-                      },
-                    }}
-                  >
-                    Off
-                  </Button>
-                )}
-              </Box>
-              <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                }}
-              >
-                <Typography variant="h4">Đèn</Typography>
-                {lightState ? (
-                  <Button
-                    onClick={handleLight}
-                    variant="contained"
-                    sx={{
-                      backgroundColor: "#3498db",
-                      "&:hover": {
-                        color: "#AAAFB4",
-                        backgroundColor: "#3498db",
-                      },
-                    }}
-                  >
-                    On
-                  </Button>
-                ) : (
-                  <Button
-                    onClick={handleLight}
-                    variant="contained"
-                    sx={{
-                      backgroundColor: "#AAAFB4",
-                      "&:hover": {
-                        color: "#fff",
-                        backgroundColor: "#AAAFB4",
-                      },
-                    }}
-                  >
-                    Off
-                  </Button>
-                )}
-              </Box>
-              <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                }}
-              >
-                <Typography variant="h4">Tưới</Typography>
-                {waterState ? (
-                  <Button
-                    onClick={handleWater}
-                    variant="contained"
-                    sx={{
-                      backgroundColor: "#3498db",
-                      "&:hover": {
-                        color: "#AAAFB4",
-                        backgroundColor: "#3498db",
-                      },
-                    }}
-                  >
-                    On
-                  </Button>
-                ) : (
-                  <Button
-                    onClick={handleWater}
-                    variant="contained"
-                    sx={{
-                      backgroundColor: "#AAAFB4",
-                      "&:hover": {
-                        color: "#fff",
-                        backgroundColor: "#AAAFB4",
-                      },
-                    }}
-                  >
-                    Off
-                  </Button>
-                )}
-              </Box>
+                    },
+                  }}
+                >
+                  Off
+                </Button>
+              )}
             </Box>
-            <Button
-              onClick={handleAuto}
-              variant="contained"
+            <Box
               sx={{
-                backgroundColor: "#3498db",
-                opacity: 0.9,
-                "&:hover": {
-                  color: "#fff",
-                  opacity: 1,
-                },
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
               }}
             >
-              AutoComplete
-            </Button>
+              <Typography variant="h4">Đèn</Typography>
+              {lightState ? (
+                <Button
+                  onClick={handleLight}
+                  variant="contained"
+                  sx={{
+                    backgroundColor: "#3498db",
+                    "&:hover": {
+                      color: "#AAAFB4",
+                      backgroundColor: "#3498db",
+                    },
+                  }}
+                >
+                  On
+                </Button>
+              ) : (
+                <Button
+                  onClick={handleLight}
+                  variant="contained"
+                  sx={{
+                    backgroundColor: "#AAAFB4",
+                    "&:hover": {
+                      color: "#fff",
+                      backgroundColor: "#AAAFB4",
+                    },
+                  }}
+                >
+                  Off
+                </Button>
+              )}
+            </Box>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
+              <Typography variant="h4">Tưới</Typography>
+              {waterState ? (
+                <Button
+                  onClick={handleWater}
+                  variant="contained"
+                  sx={{
+                    backgroundColor: "#3498db",
+                    "&:hover": {
+                      color: "#AAAFB4",
+                      backgroundColor: "#3498db",
+                    },
+                  }}
+                >
+                  On
+                </Button>
+              ) : (
+                <Button
+                  onClick={handleWater}
+                  variant="contained"
+                  sx={{
+                    backgroundColor: "#AAAFB4",
+                    "&:hover": {
+                      color: "#fff",
+                      backgroundColor: "#AAAFB4",
+                    },
+                  }}
+                >
+                  Off
+                </Button>
+              )}
+            </Box>
           </Box>
-        </Grid>
+          <Button
+            onClick={handleAuto}
+            variant="contained"
+            sx={{
+              backgroundColor: "#3498db",
+              opacity: 0.9,
+              "&:hover": {
+                color: "#fff",
+                opacity: 1,
+              },
+            }}
+          >
+            AutoComplete
+          </Button>
+        </Box>
       </Grid>
       <Paper>
         <Box
