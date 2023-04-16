@@ -1,0 +1,43 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "X:/Courses/Project_1_CE/Project/build/CMakeFiles/bootloader"
+		},
+		{
+			"file" : "X:/Courses/Project_1_CE/Project/build/CMakeFiles/bootloader.rule"
+		},
+		{
+			"file" : "X:/Courses/Project_1_CE/Project/build/CMakeFiles/bootloader-complete.rule"
+		},
+		{
+			"file" : "X:/Courses/Project_1_CE/Project/build/bootloader-prefix/src/bootloader-stamp/bootloader-build.rule"
+		},
+		{
+			"file" : "X:/Courses/Project_1_CE/Project/build/bootloader-prefix/src/bootloader-stamp/bootloader-configure.rule"
+		},
+		{
+			"file" : "X:/Courses/Project_1_CE/Project/build/bootloader-prefix/src/bootloader-stamp/bootloader-download.rule"
+		},
+		{
+			"file" : "X:/Courses/Project_1_CE/Project/build/bootloader-prefix/src/bootloader-stamp/bootloader-install.rule"
+		},
+		{
+			"file" : "X:/Courses/Project_1_CE/Project/build/bootloader-prefix/src/bootloader-stamp/bootloader-mkdir.rule"
+		},
+		{
+			"file" : "X:/Courses/Project_1_CE/Project/build/bootloader-prefix/src/bootloader-stamp/bootloader-patch.rule"
+		},
+		{
+			"file" : "X:/Courses/Project_1_CE/Project/build/bootloader-prefix/src/bootloader-stamp/bootloader-update.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"bootloader"
+		],
+		"name" : "bootloader"
+	}
+}

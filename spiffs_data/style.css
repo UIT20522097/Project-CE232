@@ -1,0 +1,185 @@
+:root {
+    --light: #d8dbe0;
+    --dark: #28292c;
+    --link: rgb(27, 129, 112);
+    --link-hover: rgb(24, 94, 82);
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    height: 100vh;
+    background: linear-gradient(to right, #4daf54, #3d8880);
+}
+.card{
+    margin: 100px auto;
+    width: 320px;
+    height: auto;
+    background: #272d40;
+    padding: 30px;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+
+/* Css somethings with basic syntax and skill */
+
+.title{
+    font-size: 32px;
+    color: #16bbdc;
+    text-align: center;
+}
+
+#clockTimes{
+    margin-top: 20px;
+}
+
+.timeDisplay{
+    font-size: 28px;
+    display: block;
+    margin-bottom: 20px;
+    background-color: #34435f59;
+    width: auto;
+    height: auto;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
+}
+
+.time{
+    display: inline;
+    margin-left: 10px;
+    color: rgb(232 232 24 / 89%);
+}
+
+.deleteTime {
+    display: flex;
+    justify-items: center;
+    justify-content: center;
+    color: rgba(121, 114, 114, 0.858);
+    background-color: wheat;
+    font-size: 32px;
+    border-style: none;
+    float: right;
+    height: 1em;
+    width: 1em;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
+}
+
+#addTimeLineBlock {
+    font-size: 28px;
+}
+
+.blur{
+    text-decoration:line-through;
+    pointer-events: none;
+    background-color: #34435f59;
+}
+
+/* Css for controller lightning */
+
+.controller {
+    position: relative;
+        width: 320px;
+        height: 200px;
+    }
+
+    .toggleSwitch {
+        position: absolute;
+        width: 200px;
+        margin-top: 20px;
+        margin-left: 10%;
+    }
+
+    #toggle {
+        position: absolute;
+        width: 100%;
+        height: 100px;
+        background-color: var(--dark);
+        border-radius: 50px;
+        cursor: pointer;
+    }
+
+    input[type='checkbox'] {
+        position: absolute;
+        display: none;
+    }
+
+    .slider {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border-radius: 50px;
+        transition: 0.3s;
+    }
+
+    input:checked ~ .slider {
+        background-color: var(--light);
+    }
+
+    .slider::before {
+        content: "";
+        position: absolute;
+        top: 13px;
+        left: 16px;
+        width: 75px;
+        height: 75px;
+        border-radius: 50%;
+        box-shadow: inset 28px -4px 0px 0px var(--light);
+        background-color: var(--dark);
+        transition: 0.3s;
+    }
+
+    input:checked ~ .slider::before {
+        transform: translateX(95px);
+        background-color: var(--dark);
+        box-shadow: none;
+    }
+
+    input[type="time"] {
+        background-color: #435aa2bd;
+    }
+
+    /* Css effect trigger */
+
+
+
+    /* Css wifi.html */
+
+form > label {
+    margin-top: 16px;
+    font-size: 24px;
+    color: #9fa4b3;
+}
+
+#ssid {
+    font-size: 16px;
+    width: 80%;
+    margin: 12px 0;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
+}
+
+#passwordWiFi {
+    font-size: 16px;
+    margin-top: 12px;
+}
+
+#submitWiFi {
+    font-size: 16px;
+}

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="icon.png" type="image/png">
+    <title>Control</title>
+</head>
+<body>
+    <div class="card clock">
+        <div class="title">Báo thức</div>
+        <ul id="clockTimes">
+            <!-- <div value="09:00" class="timeDisplay">
+                <li class="time">09:00</li>
+                <button value="09:00" class="deleteTime" onclick="handleDeleteTime(this)">X</button>
+            </div>
+            <div id="addTimeLineBlock">
+                <input type="time" name="addTimeLine" id="addTimeLine">
+                <button class="addTime" onclick="handleAddTimeLine()">+</button>
+                <button class="deleteBlockTimeLine" onclick="handleClockTimesDisplay()">x</button>
+            </div> -->
+            <button class="addTime" onclick="handleTimeLineBlockDisplay(this)">+</button>
+        </ul>
+    </div>
+
+    <div class="card controller">
+        <div class="title">Điều khiển đèn</div>
+        <div class = 'toggleSwitch'>
+            <label id="toggle">
+                <input type = 'checkbox' id="checkSwitch">
+                <span class = 'slider'></span>
+            </label>
+    </div>
+</body>
+<script src="script.js"></script>
+<!-- <script type="module" src="socket.js"></script> -->
+</html>

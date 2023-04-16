@@ -1,0 +1,13 @@
+# Target labels
+ bootloader
+# Source files and their labels
+X:/Courses/Project_1_CE/Project/build/CMakeFiles/bootloader
+X:/Courses/Project_1_CE/Project/build/CMakeFiles/bootloader.rule
+X:/Courses/Project_1_CE/Project/build/CMakeFiles/bootloader-complete.rule
+X:/Courses/Project_1_CE/Project/build/bootloader-prefix/src/bootloader-stamp/bootloader-build.rule
+X:/Courses/Project_1_CE/Project/build/bootloader-prefix/src/bootloader-stamp/bootloader-configure.rule
+X:/Courses/Project_1_CE/Project/build/bootloader-prefix/src/bootloader-stamp/bootloader-download.rule
+X:/Courses/Project_1_CE/Project/build/bootloader-prefix/src/bootloader-stamp/bootloader-install.rule
+X:/Courses/Project_1_CE/Project/build/bootloader-prefix/src/bootloader-stamp/bootloader-mkdir.rule
+X:/Courses/Project_1_CE/Project/build/bootloader-prefix/src/bootloader-stamp/bootloader-patch.rule
+X:/Courses/Project_1_CE/Project/build/bootloader-prefix/src/bootloader-stamp/bootloader-update.rule
