@@ -41,7 +41,7 @@ export default function InfoCard({ infoName, value }) {
               ? `${sunIcon}` : `${moonIcon}`
           }
           alt="icon"
-          sx={{ width: "50%", height: "200px" }}
+          sx={{ width: "200px" }}
         />
         <CardContent
           sx={{

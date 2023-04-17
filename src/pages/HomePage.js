@@ -10,8 +10,11 @@ import { CategoryScale } from "chart.js";
 import { Chart } from "chart.js/auto";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
+import FanCard from "../components/FanCard";
 import InfoCard from "../components/InfoCard";
+import LightCard from "../components/LightCard";
 import LineChart from "../components/LineChart";
+import RainCard from "../components/RainCard";
 import { Data } from "../utils/Data";
 
 Chart.register(CategoryScale);
@@ -61,22 +64,20 @@ function HomePage() {
 
   const handleCooling = () => {
     coolState
-      ? toast.success("Cooling On !!!")
-      : toast.success("Cooling Off !!!");
+      ? toast.success("Cooling Off !!!")
+      : toast.success("Cooling On !!!");
     setCoolState(!coolState);
   };
 
   const handleLight = () => {
-    lightState
-      ? toast.success("Light On !!!")
-      : toast.success("Light Off !!!");
+    lightState ? toast.success("Light Off !!!") : toast.success("Light On !!!");
     setLightState(!lightState);
   };
 
   const handleWater = () => {
     waterState
-      ? toast.success("Watering On !!!")
-      : toast.success("Watering Off !!!");
+      ? toast.success("Watering Off !!!")
+      : toast.success("Watering On !!!");
     setWaterState(!waterState);
   };
 
@@ -117,6 +118,17 @@ function HomePage() {
           {infomation.map((info) => (
             <InfoCard infoName={info.infoName} value={info.value} />
           ))}
+        </Box>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+          }}
+        >
+          <FanCard turn={coolState} />
+          <LightCard turn={lightState} />
+          <RainCard turn={waterState} />
         </Box>
         <Box
           sx={{
