@@ -25,6 +25,11 @@ const float data[] = {
     32.86, 27.21, 32.09, 22.93, 21.42, 39.33, 25.37, 25.9 , 35.56,
     25.44
 };
+
+double temperature = 0;
+bool fan_state = false;
+bool pump_state = false;
+bool light_state = false;
 // URI handler để xử lý yêu cầu GET
 esp_err_t get_handler(httpd_req_t *req)
 {
@@ -61,6 +66,83 @@ esp_err_t get_handler(httpd_req_t *req)
     return ESP_OK;
 }
 
+// URI handler để xử lý yêu cầu POST
+esp_err_t post_handler(httpd_req_t *req)
+{
+    const int max_buf_size = 1024;
+    char buf[max_buf_size];
+    size_t total_size = 0;
+    cJSON *root, *item;
+    // read the POST data from the request
+    while (total_size < req->content_len) {
+        int ret = httpd_req_recv(req, buf + total_size, max_buf_size - total_size);
+        if (ret <= 0) {
+            if (ret == HTTPD_SOCK_ERR_TIMEOUT) {
+                // handle timeout error
+            }
+            return ESP_FAIL;
+        }
+        total_size += ret;
+    }
+    buf[total_size] = '\0';
+    // parse the JSON data
+    root = cJSON_Parse(buf);
+    if (root == NULL) {
+        // handle parse error
+        httpd_resp_send_err(req, HTTPD_400_BAD_REQUEST, "Invalid JSON data");
+        goto exit;
+    }
+
+    // extract the data fields
+    item = cJSON_GetObjectItem(root, "temperature");
+    if (item != NULL && item->type == cJSON_Number) {
+        temperature = item->valuedouble;
+        // do something with the temperature data
+    }
+
+    item = cJSON_GetObjectItem(root, "fan_state");
+    if (item != NULL && item->type == cJSON_True) {
+        fan_state = true;
+        // do something with the fan state data
+    } else if (item != NULL && item->type == cJSON_False) {
+        fan_state = false;
+        // do something with the fan state data
+    }
+
+    item = cJSON_GetObjectItem(root, "pump_state");
+    if (item != NULL && item->type == cJSON_True) {
+        pump_state = true;
+        // do something with the pump state data
+    } else if (item != NULL && item->type == cJSON_False) {
+        pump_state = false;
+        // do something with the pump state data
+    }
+
+    item = cJSON_GetObjectItem(root, "light_state");
+    if (item != NULL && item->type == cJSON_True) {
+        light_state = true;
+        // do something with the light state data
+    } else if (item != NULL && item->type == cJSON_False) {
+        light_state = false;
+        // do something with the light state data
+    }
+    // Print data values to the console
+    printf("Temperature: %f\n", temperature);
+    printf("Fan state: %s\n", fan_state ? "true" : "false");
+    printf("Pump state: %s\n", pump_state ? "true" : "false");
+    printf("Light state: %s\n", light_state ? "true" : "false");
+    // send a response back to the client
+    httpd_resp_set_type(req, "application/json");
+    httpd_resp_send(req, "{\"status\":\"ok\"}", -1);
+
+    // free resources
+    cJSON_Delete(root);
+    exit:
+    // free(buf);
+    return ESP_OK;
+}
+
+
 // Khởi tạo HTTP server
 httpd_handle_t start_webserver(void)
 {
@@ -78,6 +160,17 @@ httpd_handle_t start_webserver(void)
             printf("Error registering URI handler for GET\n");
         }
     }
+    // post handler
+    httpd_uri_t post_uri = {
+        .uri       = "/status",
+        .method    = HTTP_POST,
+        .handler   = post_handler,
+        .user_ctx  = NULL
+    };
+    if (httpd_register_uri_handler(server, &post_uri) != ESP_OK) {
+        printf("Error registering URI handler for POST\n");
+    }
+
     return server;
 }
 

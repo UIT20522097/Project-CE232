@@ -10,8 +10,8 @@
 #include "nvs_flash.h"
 #include "arpa/inet.h"
 
-#define WIFI_SSID "Meow"
-#define WIFI_PASS "paracetamol"
+#define WIFI_SSID "CARLOS"
+#define WIFI_PASS ""
 
 static const char *TAG = "wifi";
 
