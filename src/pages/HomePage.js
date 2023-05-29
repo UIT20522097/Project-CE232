@@ -2,7 +2,6 @@ import {
   Box,
   Button,
   CssBaseline,
-  Grid,
   Paper,
   Typography,
 } from "@mui/material";
@@ -10,12 +9,11 @@ import { CategoryScale } from "chart.js";
 import { Chart } from "chart.js/auto";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
-import FanCard from "../components/FanCard";
-import InfoCard from "../components/InfoCard";
-import LightCard from "../components/LightCard";
 import LineChart from "../components/LineChart";
-import RainCard from "../components/RainCard";
 import { Data } from "../utils/Data";
+import { collection, doc, getDocs } from "firebase/firestore";
+import { child, get, getDatabase, onValue, ref, set } from "firebase/database";
+import { database } from "../firebase-config";
 
 Chart.register(CategoryScale);
 
@@ -42,13 +40,21 @@ function HomePage() {
   const [coolState, setCoolState] = useState(false);
   const [lightState, setLightState] = useState(false);
   const [waterState, setWaterState] = useState(false);
+  // useEffect(() => {
+  //   const setWaters = async () => {
+  //     set(ref(database, "water/" + "water2"), {
+  //       state: "false",
+  //     });
+  //   };
+  //   setWaters();
+  // }, []);
 
   const [chartData, setChartData] = useState({
     labels: Data.map((data) => data.year),
     datasets: [
       {
-        label: "Users Gained ",
-        data: Data.map((data) => data.userGain),
+        label: "Value",
+        data: Data.map((data) => data.value),
         backgroundColor: [
           "rgba(75,192,192,1)",
           "&quot#ecf0f1",
@@ -63,6 +69,18 @@ function HomePage() {
   });
 
   const handleCooling = () => {
+    const dbRef = ref(getDatabase());
+    get(child(dbRef, `auth/user2`))
+      .then((snapshot) => {
+        if (snapshot.exists()) {
+          console.log(snapshot.val());
+        } else {
+          console.log("No data available");
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
     coolState
       ? toast.success("Cooling Off !!!")
       : toast.success("Cooling On !!!");
@@ -95,7 +113,7 @@ function HomePage() {
 
   return (
     <div>
-      <Grid
+      <Box
         container
         component="main"
         sx={{
@@ -106,37 +124,39 @@ function HomePage() {
         }}
       >
         <CssBaseline />
-
-        <Box
-          sx={{
-            my: 8,
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-          }}
-        >
-          {infomation.map((info) => (
-            <InfoCard infoName={info.infoName} value={info.value} />
-          ))}
-        </Box>
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-          }}
-        >
-          <FanCard turn={coolState} />
-          <LightCard turn={lightState} />
-          <RainCard turn={waterState} />
-        </Box>
+        <Paper sx={{ padding: "20px", mt: 3 }}>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: {xs: 'column', md: 'row'},
+                justifyContent: "space-around",
+                mb: 3,
+              }}
+            >
+              <LineChart data={chartData} info={info[0]} />
+              <LineChart data={chartData} info={info[1]} />
+            </Box>
+            <LineChart
+              data={chartData}
+              info={info[2]}
+              sx={{ display: "flex" }}
+            />
+          </Box>
+        </Paper>
         <Box
           sx={{
             my: 4,
             mx: 4,
             display: "flex",
             flexDirection: "column",
-            minWidth: "1000px",
+            minWidth: {xs: '600px', md: '1000px'},
           }}
         >
           <Typography variant="h3" component="h4" alignSelf="center">
@@ -280,33 +300,7 @@ function HomePage() {
             AutoComplete
           </Button>
         </Box>
-      </Grid>
-      <Paper>
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-around",
-              mb: 3,
-            }}
-          >
-            <LineChart chartData={chartData} info={info[0]} />
-            <LineChart chartData={chartData} info={info[1]} />
-          </Box>
-          <LineChart
-            chartData={chartData}
-            info={info[2]}
-            sx={{ display: "flex" }}
-          />
-        </Box>
-      </Paper>
+      </Box>
     </div>
   );
 }

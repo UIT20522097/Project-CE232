@@ -4,6 +4,7 @@ import BlankLayout from "../layouts/BlankLayout";
 import MainLayout from "../layouts/MainLayout";
 import HomePage from "../pages/HomePage";
 import NotFoundPage from "../pages/NotFoundPage";
+import LoginPage from "../pages/LoginPage";
 
 function Router() {
   return (
@@ -15,9 +16,11 @@ function Router() {
         }
       >
         <Route index element={<HomePage />} />
+        <Route index element={<HomePage />} />
       </Route>
 
       <Route element={<BlankLayout />}>
+      <Route path="/login" element={<LoginPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>

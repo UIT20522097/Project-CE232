@@ -11,6 +11,7 @@ import {
 } from "chart.js";
 import React from "react";
 import { Line } from "react-chartjs-2";
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 
 ChartJS.register(
   CategoryScale,
@@ -19,10 +20,29 @@ ChartJS.register(
   LineElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
+  ChartDataLabels
 );
 
-function LineChart({ chartData, info }) {
+function LineChart({ data, info }) {
+  const options = {
+    plugins: {
+      datalabels: {
+        align: 'end',
+        anchor: 'end',
+        formatter: function(value, context) {
+          if (context.dataIndex === context.dataset.data.length - 1) {
+            return value;
+          }
+          return '';
+        },
+        color: 'black',
+        size: '30px'
+      },
+      legend: false
+    },
+    // Các tùy chọn khác của biểu đồ
+  };
   return (
     <div
       className="chart-container"
@@ -30,18 +50,8 @@ function LineChart({ chartData, info }) {
     >
       <h2 style={{ textAlign: "center" }}>{info.name}</h2>
       <Line
-        data={chartData}
-        options={{
-          plugins: {
-            title: {
-              display: true,
-              text: info.title,
-            },
-            legend: {
-              display: false,
-            },
-          },
-        }}
+        data={data}
+        options={options}
       />
     </div>
   );
